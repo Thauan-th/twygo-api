@@ -22,7 +22,7 @@ lessons.each do |lesson|
   l.save!
 
   l.video.attach(
-    io: File.open(Rails.root.join('lib', 'assets', 'lesson_one_ruby_on_rails.mp4')),
+    io: File.open(Rails.root.join('lib', 'assets', 'ruby_lesson.mp4')),
     filename: 'video.mp4',
     content_type: 'video/mp4'
   )
