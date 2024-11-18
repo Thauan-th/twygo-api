@@ -1,9 +1,29 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+# frozen_string_literal: true
+
+course = Course.create!(
+  title: 'Ruby on Rails',
+  description: 'Learn how to build web applications using Ruby on Rails'
+)
+
+lessons = [
+  {
+    title: 'Aprendendo sobre Rails',
+    description: 'Introdução ao Ruby on Rails'
+  },
+  {
+    title: 'Aprofundando em Rails',
+    description: 'Aprofundando em Ruby on Rails'
+  }
+]
+
+lessons.each do |lesson|
+  l = Lesson.new(lesson)
+  l.course = course
+  l.save!
+
+  l.video.attach(
+    io: File.open(Rails.root.join('lib', 'assets', 'lesson_one_ruby_on_rails.mp4')),
+    filename: 'video.mp4',
+    content_type: 'video/mp4'
+  )
+end
