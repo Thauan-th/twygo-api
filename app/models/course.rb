@@ -2,6 +2,7 @@
 
 class Course < ApplicationRecord
   has_many :lessons, dependent: :destroy
+  has_many :reports, dependent: :destroy
   has_one_attached :image
 
   validates :title, :description, presence: true

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class CoursesController < ApplicationController
-  before_action :set_course, only: %i[show update destroy]
+  before_action :set_course, only: %i[show update destroy report]
 
   # GET /courses
   # GET /courses.json
@@ -39,6 +39,14 @@ class CoursesController < ApplicationController
   # DELETE /courses/1.json
   def destroy
     @course.destroy!
+  end
+
+  def report
+    report = Report.create!(course: @course)
+
+    report.generate
+
+    render json: { message: 'Report will be available soon', report_id: report.id }, status: :ok
   end
 
   private
