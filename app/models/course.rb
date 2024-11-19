@@ -2,6 +2,8 @@
 
 class Course < ApplicationRecord
   has_many :lessons, dependent: :destroy
+  has_one_attached :image
+
   validates :title, :description, presence: true
   validates :start_date, presence: true
   validate :end_date_after_start_date, if: -> { start_date.present? && end_date.present? }
