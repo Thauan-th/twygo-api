@@ -38,7 +38,9 @@ gem 'image_processing', '~> 1.2'
 # gem "rack-cors"
 
 gem 'devise'
+gem 'dotenv'
 gem 'friendly_id'
+gem 'sidekiq'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
