@@ -1,0 +1,68 @@
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+  description: API for managing courses.
+paths:
+  "/courses":
+    get:
+      summary: Retrieve a list of courses
+      description: This endpoint returns a list of all available courses. Requires a valid bearer token for authentication.
+      tags:
+      - courses
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response with the list of courses
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          description: Unique identifier for the course
+                          example: 1
+                        created_at:
+                          type: string
+                          format: date-time
+                          description: Date and time when the course was created
+                          example: "2024-11-19T02:17:58.024Z"
+                        updated_at:
+                          type: string
+                          format: date-time
+                          description: Date and time when the course was last updated
+                          example: "2024-11-19T02:17:58.024Z"
+                        title:
+                          type: string
+                          description: Title of the course
+                          example: "Ruby on Rails"
+                        description:
+                          type: string
+                          description: Detailed description of the course
+                          example: "Learn how to build web applications using Ruby on Rails"
+        '401':
+          description: Unauthorized. Invalid or missing bearer token.
+        '500':
+          description: Internal server error.
+servers:
+- url: http://localhost:3000
+  description: Local development server
+- url: https://api.production.example.com
+  description: Production server
+- url: https://api.staging.example.com
+  description: Staging server
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+tags:
+- name: courses
+  description: Endpoints related to courses

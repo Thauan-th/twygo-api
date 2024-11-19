@@ -42,6 +42,9 @@ gem 'dotenv'
 gem 'friendly_id'
 gem 'sidekiq'
 
+gem 'rswag-api'
+gem 'rswag-ui'
+
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'debug', platforms: %i[mri windows]
