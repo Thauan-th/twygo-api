@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class Course < ApplicationRecord
+  extend FriendlyId
+  friendly_id :title, use: :slugged
+
   has_many :lessons, dependent: :destroy
   has_many :reports, dependent: :destroy
   has_one_attached :image

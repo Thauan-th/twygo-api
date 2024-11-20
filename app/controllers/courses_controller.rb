@@ -6,7 +6,7 @@ class CoursesController < ApplicationController
   # GET /courses
   # GET /courses.json
   def index
-    @courses = Course.all
+    @courses = Course.opened
   end
 
   # GET /courses/1
@@ -53,7 +53,11 @@ class CoursesController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_course
-    @course = Course.find(params[:id])
+    @course = if params[:include_lessons] == 'true'
+                Course.includes(:lessons).friendly.find(params[:id])
+              else
+                Course.friendly.find(params[:id])
+              end
   end
 
   # Only allow a list of trusted parameters through.

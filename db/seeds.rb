@@ -2,7 +2,14 @@
 
 course = Course.create!(
   title: 'Ruby on Rails',
-  description: 'Learn how to build web applications using Ruby on Rails'
+  description: 'Learn how to build web applications using Ruby on Rails',
+  start_date: Time.zone.now
+)
+
+course.image.attach(
+  io: File.open(Rails.root.join('lib', 'assets', 'ruby_on_rails.jpg')),
+  filename: 'ruby_on_rails.jpg',
+  content_type: 'image/jpg'
 )
 
 lessons = [
