@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class CoursesController < ApplicationController
-  before_action :set_course, only: %i[show update destroy report]
+  before_action :set_course, only: %i[show update destroy]
 
   # GET /courses
   # GET /courses.json
@@ -17,8 +17,6 @@ class CoursesController < ApplicationController
   # POST /courses.json
   def create
     @course = Course.new(course_params.except(:image))
-
-    @course.errors.add(:base, 'testeis required')
 
     if @course.save
       @course.image.attach(course_params[:image]) if course_params[:image].present?
@@ -42,14 +40,6 @@ class CoursesController < ApplicationController
   # DELETE /courses/1.json
   def destroy
     @course.destroy!
-  end
-
-  def report
-    report = Report.create!(course: @course)
-
-    report.generate
-
-    render json: { message: 'Report will be available soon', report_id: report.id }, status: :ok
   end
 
   private

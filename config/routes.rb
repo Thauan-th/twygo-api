@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   defaults format: :json do
     resources :courses do
       resources :lessons
+      resources :reports, only: %i[create index]
     end
   end
 end
