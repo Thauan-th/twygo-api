@@ -16,11 +16,11 @@ class LessonsController < ApplicationController
   # POST /lessons
   # POST /lessons.json
   def create
-    @lesson = Lesson.new(lesson_params)
-
-    @lesson.course_id = params[:course_id] if params[:course_id] && @lesson.course_id.nil?
+    @lesson = Lesson.new(lesson_params.except(:video))
+    @lesson.course = Course.friendly.find(params[:course_id]) if params[:course_id] && @lesson.course_id.nil?
 
     if @lesson.save
+      @lesson.video.attach(params[:lesson][:video]) if lesson_params[:video].present?
       render :show, status: :created
     else
       render json: @lesson.errors, status: :unprocessable_entity
@@ -52,6 +52,6 @@ class LessonsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def lesson_params
-    params.require(:lesson).permit(:title, :description, :course_id)
+    params.require(:lesson).permit(:title, :description, :course_id, :course_slug, :video)
   end
 end

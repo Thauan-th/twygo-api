@@ -7,6 +7,6 @@ json.image course.image.attached? ? course.image.url : nil
 if params[:include_lessons] == 'true'
   json.lessons course.lessons do |lesson|
     json.extract! lesson, :id, :title, :description, :slug, :created_at, :updated_at
-    json.video lesson.video.attached? ? lesson.video.url : nil
+    json.video_url lesson.video.attached? ? lesson.video.url : nil
   end
 end
