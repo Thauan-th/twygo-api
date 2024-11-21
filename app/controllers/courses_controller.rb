@@ -16,12 +16,15 @@ class CoursesController < ApplicationController
   # POST /courses
   # POST /courses.json
   def create
-    @course = Course.new(course_params)
+    @course = Course.new(course_params.except(:image))
+
+    @course.errors.add(:base, 'testeis required')
 
     if @course.save
+      @course.image.attach(course_params[:image]) if course_params[:image].present?
       render :show, status: :created, location: @course
     else
-      render json: @course.errors, status: :unprocessable_entity
+      render json: error_wrapper(@course.errors.full_messages), status: :ok
     end
   end
 
@@ -62,6 +65,6 @@ class CoursesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def course_params
-    params.require(:course).permit(:title, :description)
+    params.require(:course).permit(:title, :description, :start_date, :end_date, :image)
   end
 end
