@@ -19,7 +19,7 @@ class Report < ApplicationRecord
     status == 'pending'
   end
 
-  def mark_as_completed
+  def mark_as_completed!
     update!(status: 'completed')
   end
 end

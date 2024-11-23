@@ -4,6 +4,6 @@ class ReportBuilderWorker
   include Sidekiq::Job
 
   def perform(report_id)
-    CourseReport.new(report_id).generate
+    Reports::Course.new(report_id).call
   end
 end

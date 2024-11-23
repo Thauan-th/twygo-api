@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      h1 {
+        color: red;
+        text-align: center;
+      }
+      p {
+        font-size: 14px;
+        line-height: 1.6;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      table, th, td {
+        border: 1px solid black;
+      }
+      th, td {
+        padding: 8px;
+        text-align: left;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Relatório de Aulas</h1>
+    <p>Resumo das informações de aulas, vídeos e duração.</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Descrição</th>
+          <th>Valor</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Total de Aulas</td>
+          <td><%= lessons_count %></td>
+        </tr>
+        <tr>
+          <td>Total de Vídeos</td>
+          <td><%= lessons_video_count %></td>
+        </tr>
+        <tr>
+          <td>Tamanho dos Vídeos (MB)</td>
+          <td><%= lessons_video_size_in_megabytes %></td>
+        </tr>
+        <tr>
+          <td>Duração dos Vídeos (Minutos)</td>
+          <td><%= lessons_video_duration_in_minutes %></td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>

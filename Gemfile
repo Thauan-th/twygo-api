@@ -45,6 +45,9 @@ gem 'sidekiq'
 gem 'rswag-api'
 gem 'rswag-ui'
 
+gem 'prawn'
+gem 'prawn-table'
+
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'debug', platforms: %i[mri windows]
