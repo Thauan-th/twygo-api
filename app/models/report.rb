@@ -8,7 +8,7 @@ class Report < ApplicationRecord
   has_one_attached :file
 
   def generate
-    ReportBuilderWorker.perform_async(id)
+    Reports::Course.new(id).call
   end
 
   def completed?

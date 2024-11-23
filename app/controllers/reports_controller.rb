@@ -4,11 +4,11 @@ class ReportsController < ApplicationController
   before_action :set_course
 
   def create
-    report = Report.create!(course: @course)
+    @report = Report.create!(course: @course)
 
-    report.generate
+    @report.generate
 
-    render json: { message: 'Report will be available soon', report_id: report.id }, status: :ok
+    render json: { message: 'Report generated', id: @report.id }, status: :created
   end
 
   def index

@@ -21,7 +21,13 @@ class CoursesController < ApplicationController
   end
 
   def update
-    if @course.update(course_params)
+    if @course.update(course_params.except(:image))
+      if course_params[:image].present?
+        @course.image.attach(course_params[:image])
+      elsif @course.image.attached?
+        @course.image.purge
+      end
+
       render :show, status: :ok, location: @course
     else
       render json: @course.errors, status: :unprocessable_entity
