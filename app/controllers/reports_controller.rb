@@ -12,7 +12,7 @@ class ReportsController < ApplicationController
   end
 
   def index
-    @reports = Report.all
+    @reports = Report.by_course(@course)
   end
 
   private

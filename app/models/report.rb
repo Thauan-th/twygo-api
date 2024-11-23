@@ -7,6 +7,8 @@ class Report < ApplicationRecord
 
   has_one_attached :file
 
+  scope :by_course, ->(course) { where(course: course) }
+
   def generate
     Reports::Course.new(id).call
   end
