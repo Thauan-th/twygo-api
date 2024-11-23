@@ -1,0 +1,308 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+  description: API for managing courses.
+paths:
+  "/courses":
+    get:
+      summary: Retrieve a list of courses
+      description: This endpoint returns a list of all available courses. Requires a valid bearer token for authentication.
+      tags:
+        - courses
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response with the list of courses
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          description: Unique identifier for the course
+                          example: 1
+                        created_at:
+                          type: string
+                          format: date-time
+                          description: Date and time when the course was created
+                          example: "2024-11-19T02:17:58.024Z"
+                        updated_at:
+                          type: string
+                          format: date-time
+                          description: Date and time when the course was last updated
+                          example: "2024-11-19T02:17:58.024Z"
+                        title:
+                          type: string
+                          description: Title of the course
+                          example: "Ruby on Rails"
+                        description:
+                          type: string
+                          description: Detailed description of the course
+                          example: "Learn how to build web applications using Ruby on Rails"
+        '401':
+          description: Unauthorized. Invalid or missing bearer token.
+        '500':
+          description: Internal server error.
+    post:
+      summary: Create a new course
+      description: Creates a new course with the provided details.
+      tags:
+        - courses
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+                start_date:
+                  type: string
+                  format: date
+                end_date:
+                  type: string
+                  format: date
+                image:
+                  type: string
+                  format: binary
+              required:
+                - title
+                - description
+                - start_date
+      responses:
+        '201':
+          description: Course successfully created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    description: Unique identifier for the course
+                    example: 1
+                  title:
+                    type: string
+                    description: Title of the course
+                    example: "Ruby on Rails"
+                  description:
+                    type: string
+                    description: Description of the course
+                    example: "Learn how to build web applications using Ruby on Rails"
+                  start_date:
+                    type: string
+                    format: date
+                    description: The course start date
+                    example: "2024-01-01"
+                  end_date:
+                    type: string
+                    format: date
+                    description: The course end date
+                    example: "2024-12-31"
+        '400':
+          description: Invalid input data
+        '401':
+          description: Unauthorized. Invalid or missing bearer token.
+        '500':
+          description: Internal server error.
+
+  "/courses/{id}":
+    parameters:
+      - name: id
+        in: path
+        description: Unique identifier for the course
+        required: true
+        schema:
+          type: integer
+    get:
+      summary: Retrieve a specific course
+      description: This endpoint retrieves the details of a single course.
+      tags:
+        - courses
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response with the course details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    description: Unique identifier for the course
+                    example: 1
+                  title:
+                    type: string
+                    description: Title of the course
+                    example: "Ruby on Rails"
+                  description:
+                    type: string
+                    description: Description of the course
+                    example: "Learn how to build web applications using Ruby on Rails"
+                  start_date:
+                    type: string
+                    format: date
+                    description: The course start date
+                    example: "2024-01-01"
+                  end_date:
+                    type: string
+                    format: date
+                    description: The course end date
+                    example: "2024-12-31"
+        '404':
+          description: Course not found
+        '401':
+          description: Unauthorized. Invalid or missing bearer token.
+    patch:
+      summary: Update a course
+      description: This endpoint updates the details of an existing course.
+      tags:
+        - courses
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+                start_date:
+                  type: string
+                  format: date
+                end_date:
+                  type: string
+                  format: date
+                image:
+                  type: string
+                  format: binary
+              required:
+                - title
+                - description
+                - start_date
+      responses:
+        '200':
+          description: Successful update of the course
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  title:
+                    type: string
+                  description:
+                    type: string
+                  start_date:
+                    type: string
+                    format: date
+                  end_date:
+                    type: string
+                    format: date
+        '400':
+          description: Invalid input data
+        '401':
+          description: Unauthorized. Invalid or missing bearer token.
+        '404':
+          description: Course not found
+        '500':
+          description: Internal server error.
+    put:
+      summary: Replace a course
+      description: This endpoint replaces the entire details of an existing course.
+      tags:
+        - courses
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+                start_date:
+                  type: string
+                  format: date
+                end_date:
+                  type: string
+                  format: date
+                image:
+                  type: string
+                  format: binary
+              required:
+                - title
+                - description
+                - start_date
+      responses:
+        '200':
+          description: Course successfully replaced
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  title:
+                    type: string
+                  description:
+                    type: string
+                  start_date:
+                    type: string
+                    format: date
+                  end_date:
+                    type: string
+                    format: date
+        '400':
+          description: Invalid input data
+        '401':
+          description: Unauthorized. Invalid or missing bearer token.
+        '404':
+          description: Course not found
+        '500':
+          description: Internal server error.
+    delete:
+      summary: Delete a course
+      description: This endpoint deletes a course based on the ID provided.
+      tags:
+        - courses
+      security:
+        - bearerAuth: []
+      responses:
+        '204':
+          description: Course successfully deleted
+        '404':
+          description: Course not found
+        '401':
+          description: Unauthorized. Invalid or missing bearer token.
+        '500':
+          description: Internal server error.
+
+servers:
+  - url: https://{defaultHost}
+    variables:
+      defaultHost:
+        default: localhost:3000
