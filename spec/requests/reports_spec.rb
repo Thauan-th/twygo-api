@@ -11,7 +11,7 @@ RSpec.describe 'reports', type: :request do
       description 'Creates a new report for a specific course. The report will be available soon.'
       parameter name: :course_id, in: :path, type: :string, description: 'Course ID', required: true
 
-      response '200', 'Report created successfully' do
+      response '201', 'Report created successfully' do
         let(:course_id) { course.id }
         schema type: :object,
                properties: {
@@ -21,7 +21,7 @@ RSpec.describe 'reports', type: :request do
                required: %w[message report_id]
 
         run_test! do
-          expect(JSON.parse(response.body)['message']).to eq('Report will be available soon')
+          expect(JSON.parse(response.body)['message']).to eq('Report generated')
           expect(JSON.parse(response.body)['report_id']).to be_an(Integer)
         end
       end

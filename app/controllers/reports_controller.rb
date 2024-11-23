@@ -8,7 +8,7 @@ class ReportsController < ApplicationController
 
     @report.generate
 
-    render json: { message: 'Report generated', id: @report.id }, status: :created
+    render json: { message: 'Report generated', report_id: @report.id }, status: :created
   end
 
   def index
