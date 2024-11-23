@@ -29,10 +29,8 @@ Essa API conta com dados de desenvolvimento situados em `db/seeds`, então após
 ```bash
 make console
 
-rails db:seed // Dentro do console do container
+rails db:seed
 ```
-
-
 
 ### `make start`
 
