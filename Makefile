@@ -13,5 +13,8 @@ bash:
 console:
 	docker  exec -it $(SERVICE) rails console
 
-sidekiq:
-	docker	exec -it $(SERVICE) bundle exec sidekiq
+test:
+	docker exec -it $(SERVICE) rspec spec -fd
+
+server:
+	docker exec -it $(SERVICE) rails s -p 3000 -b '0.0.0.0'
