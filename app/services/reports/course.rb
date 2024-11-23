@@ -20,8 +20,7 @@ module Reports
       attrs = {
         lessons_count: lessons.count,
         lessons_video_count: count_attached_videos,
-        lessons_video_size_in_megabytes: calculate_attached_videos_size,
-        lessons_video_duration_in_minutes: calculate_attached_video_duration
+        lessons_video_size_in_megabytes: calculate_attached_videos_size
       }
 
       report.update!(attrs)
@@ -39,10 +38,6 @@ module Reports
       end
 
       result / 1.megabyte
-    end
-
-    def calculate_attached_video_duration
-      0
     end
   end
 end

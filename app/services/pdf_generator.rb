@@ -13,7 +13,7 @@ class PdfGenerator
       tempfile.binmode
       tempfile.write(generate_pdf)
       tempfile.rewind
-      save_pdf_to_model(tempfile)
+      report.update(file: tempfile)
     end
   end
 
@@ -46,13 +46,11 @@ class PdfGenerator
       ['Total de Aulas', lessons_count],
       ['Total de Vídeos', report.lessons_video_count],
       ['Tamanho dos Vídeos (MB)', report.lessons_video_size_in_megabytes],
-      ['Duração dos Vídeos (Minutos)', report.lessons_video_duration_in_minutes],
       ['Aulas Criadas na Última Semana', lessons_created_on_last_week],
       ['Aulas Criadas no Último Mês', lessons_created_on_last_month]
     ]
   end
 
-  # Métodos auxiliares
   def lessons_count
     lessons.size
   end

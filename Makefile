@@ -10,9 +10,6 @@ stop:
 bash:
 	docker exec -it $(SERVICE) bash
 
-server:
-	docker  exec $(SERVICE) bin/rails s -b 0.0.0.0 -p 3000
-
 console:
 	docker  exec -it $(SERVICE) rails console
 

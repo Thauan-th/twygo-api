@@ -8,7 +8,6 @@ class CreateReports < ActiveRecord::Migration[7.1]
       t.integer :lessons_count, null: false, default: 0
       t.integer :lessons_video_count, null: false, default: 0
       t.decimal :lessons_video_size_in_megabytes, null: false, default: 0
-      t.decimal :lessons_video_duration_in_minutes, null: false, default: 0
 
       t.timestamps
     end

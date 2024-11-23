@@ -7,6 +7,5 @@ FactoryBot.define do
     lessons_count { 0 }
     lessons_video_count { 0 }
     lessons_video_size_in_megabytes { 0 }
-    lessons_video_duration_in_minutes { 0 }
   end
 end
